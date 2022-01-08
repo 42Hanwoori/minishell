@@ -1,6 +1,6 @@
 #include "builtin.h"
 
-int		valid_exit_arg(char	*arg)
+int	valid_exit_arg(char	*arg)
 {
 	int	i;
 
@@ -17,7 +17,7 @@ int		valid_exit_arg(char	*arg)
 	return (1);
 }
 
-int		exit_numeric_arg_cal(char *arg)
+int	exit_numeric_arg_cal(char *arg)
 {
 	int		res;
 

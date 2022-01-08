@@ -1,5 +1,19 @@
 #include "builtin.h"
 
+t_env	*env_dup_check(t_env *env_list, char *new_key)
+{
+	t_env	*temp;
+
+	temp = env_list;
+	while (temp)
+	{
+		if (!ft_strcmp(temp->key, new_key))
+			return (temp);
+		temp = temp->next;
+	}	
+	return (NULL);
+}
+
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;

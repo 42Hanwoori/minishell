@@ -11,7 +11,7 @@ char	*read_value_of_key(t_env *env_list, char *key)
 	return (NULL);
 }
 
-int		ft_echo(char **buf)
+int	ft_echo(char **buf)
 {
 	int	i;
 

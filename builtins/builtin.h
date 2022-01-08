@@ -16,6 +16,7 @@ typedef struct s_env
 }	t_env;
 
 //builtin_tools.c
+t_env				*env_dup_check(t_env *env_list, char *new_key);
 int					ft_strcmp(const char *s1, const char *s2);
 void				ft_free_split(char **draw);
 void				env_lstadd_back(t_env **lst, t_env *new,
@@ -35,10 +36,10 @@ int					ft_echo(char **buf);
 void				ft_pwd(char **dbuf);
 
 //builtin_export.c
+int					export_key_syntax_error(char *s);
 int					export_key_syntax_check(char *s);
 void				reset_env_print_check(t_env *env_list);
 void				print_env_in_order(t_env *env_list);
-t_env				*env_dup_check(t_env *env_list, char *new_key);
 void				ft_export(char **dbuf, t_env *env_list);
 
 //builtin_exit.c

@@ -47,7 +47,7 @@ void	ft_env(t_env *env_list)
 	g_stat = 0;
 }
 
-int		unset_key_syntax_check(char *s)
+int	unset_key_syntax_check(char *s)
 {
 	int	i;
 

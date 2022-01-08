@@ -1,30 +1,27 @@
 #include "builtin.h"
 
+int	export_key_syntax_error(char *s)
+{
+	write(2, "bash: export: `", 15);
+	write(2, s, ft_strlen(s));
+	write(2, "': not a valid identifier\n", 27);
+	g_stat = 1;
+	return (0);
+}
+
 int	export_key_syntax_check(char *s)
 {
 	int	i;
 
 	i = -1;
 	if (s[0] > 47 && s[0] < 58)
-	{
-		write(2, "bash: export: `", 15);
-		write(2, s, ft_strlen(s));
-		write(2, "': not a valid identifier\n", 27);
-		g_stat = 1;
-		return (0);
-	}
+		return (export_key_syntax_error(s));
 	while (s[++i])
 	{
 		if (s[i] == '_')
 			continue ;
 		if (!ft_isalnum(s[i]))
-		{
-			write(2, "bash: export: `", 15);
-			write(2, s, ft_strlen(s));
-			write(2, "': not a valid identifier\n", 27);
-			g_stat = 1;
-			return (0);
-		}
+			return (export_key_syntax_error(s));
 	}
 	g_stat = 0;
 	return (1);
@@ -70,35 +67,19 @@ void	print_env_in_order(t_env *env_list)
 	reset_env_print_check(env_list);
 }
 
-t_env	*env_dup_check(t_env *env_list, char *new_key)
-{
-	t_env	*temp;
-
-	temp = env_list;
-	while (temp)
-	{
-		if (!ft_strcmp(temp->key, new_key))
-			return (temp);
-		temp = temp->next;
-	}	
-	return (NULL);
-}
-
 void	ft_export(char **dbuf, t_env *env_list)
 {
-	int		i;
 	char	**splits;
 	t_env	*temp;
 
-	i = -1;
 	if (!dbuf)
 	{
 		g_stat = 0;
 		return (print_env_in_order(env_list));
 	}
-	while (dbuf[++i])
+	while (*dbuf)
 	{
-		splits = ft_split(dbuf[i], '=');
+		splits = ft_split(*(dbuf++), '=');
 		if (!splits[1] || !export_key_syntax_check(splits[0]))
 			continue ;
 		temp = env_dup_check(env_list, splits[0]);
