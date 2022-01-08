@@ -19,17 +19,17 @@ int	ft_strcmp(const char *s1, const char *s2)
 void	ft_free_split(char **draw)
 {
 	int	i;
-	
+
 	i = 0;
-	while(draw[i])
+	while (draw[i])
 		free(draw[i++]);
 	free(draw);
 }
 
 void	env_lstadd_back(t_env **lst, t_env *new, char *key, char *value)
 {
-	t_env **phead;
-	
+	t_env	**phead;
+
 	new = (t_env *)malloc(sizeof(t_env));
 	new->key = key;
 	new->value = value;
@@ -46,13 +46,12 @@ t_env	*env_set(char	**envp)
 	char	**splits;
 	t_env	*temp;
 	t_env	*env_list;
-	
+
 	env_list = 0;
-	while(*envp)
+	while (*envp)
 	{
 		splits = ft_split(*(envp++), '=');
 		env_lstadd_back(&env_list, temp, splits[0], splits[1]);
 	}
-	return(env_list);
+	return (env_list);
 }
-

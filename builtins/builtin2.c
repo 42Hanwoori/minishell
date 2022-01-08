@@ -20,9 +20,9 @@ int		ft_echo(char **buf)
 	{
 		i++;
 		if (buf[i + 1] == NULL)
-			break;
+			break ;
 	}
-	while(buf[i])
+	while (buf[i])
 	{
 		printf("%s", buf[i]);
 		if (buf[i++ + 1] != 0)
@@ -30,15 +30,15 @@ int		ft_echo(char **buf)
 	}
 	if ((i == 1) || (i > 1 && ft_strcmp(buf[0], "-n") != 0))
 		printf("\n");
-	//$? = 0;
-	return(0);
+	g_stat = 0;
+	return (0);
 }
 
 void	ft_pwd(char **dbuf)
 {
 	char	pbuf[4096];
-	
+
 	getcwd(pbuf, 4096);
 	printf("%s\n", pbuf);
-	//$? = 0;
+	g_stat = 0;
 }

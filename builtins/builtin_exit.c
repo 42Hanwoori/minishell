@@ -42,7 +42,7 @@ void	exit_extra_cases(int c, char *s)
 	{
 		printf("exit\n");
 		write(2, "bash: exit: too many arguments\n", 31);
-		//$? = 1;
+		g_stat = 1;
 	}
 }
 

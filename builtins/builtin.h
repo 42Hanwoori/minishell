@@ -1,11 +1,11 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-#include "./libft/libft.h"
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <errno.h>
+# include "./libft/libft.h"
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <errno.h>
 
 typedef struct s_env
 {
@@ -18,7 +18,8 @@ typedef struct s_env
 //builtin_tools.c
 int					ft_strcmp(const char *s1, const char *s2);
 void				ft_free_split(char **draw);
-void				env_lstadd_back(t_env **lst, t_env *new, char *key, char *value);
+void				env_lstadd_back(t_env **lst, t_env *new,
+						char *key, char *value);
 t_env				*env_set(char	**envp);
 
 //builtin1.c

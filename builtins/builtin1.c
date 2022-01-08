@@ -20,7 +20,7 @@ void	ft_cd(char **buf, t_env *env_list)
 	if (!buf[1])
 	{
 		chdir(read_value_of_key(env_list, "HOME"));
-		//$? = 0;
+		g_stat = 0;
 		return ;
 	}
 	temp = chdir(buf[0]);
@@ -28,10 +28,10 @@ void	ft_cd(char **buf, t_env *env_list)
 	{
 		err = errno;
 		cd_error(err, buf[0]);
-		//$? = err;
+		g_stat = err;
 		return ;
 	}
-	//$? = 0;
+	g_stat = 0;
 }
 
 void	ft_env(t_env *env_list)
@@ -41,15 +41,15 @@ void	ft_env(t_env *env_list)
 	one = env_list;
 	while (one)
 	{
-		printf("%s=%s\n",one->key, one->value);
+		printf("%s=%s\n", one->key, one->value);
 		one = one->next;
 	}
-	//$? = 0;
+	g_stat = 0;
 }
 
 int		unset_key_syntax_check(char *s)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (s[0] > 47 && s[0] < 58)
@@ -57,19 +57,19 @@ int		unset_key_syntax_check(char *s)
 		write(2, "bash: unset: `", 14);
 		write(2, s, ft_strlen(s));
 		write(2, "': not a valid identifier\n", 27);
-		//$? = 1;
+		g_stat = 1;
 		return (0);
 	}
 	while (s[++i])
 	{
 		if (s[i] == '_')
-			continue;
+			continue ;
 		if (!ft_isalnum(s[i]))
 		{
 			write(2, "bash: unset: `", 14);
 			write(2, s, ft_strlen(s));
 			write(2, "': not a valid identifier\n", 27);
-			//$? = 1;
+			g_stat = 1;
 			return (0);
 		}
 	}
@@ -83,7 +83,7 @@ void	ft_unset(char **dbuf, t_env **env_list)
 	t_env	*del;
 
 	i = -1;
-	while(dbuf[++i])
+	while (dbuf[++i])
 	{
 		if (!unset_key_syntax_check(dbuf[i]))
 			continue ;
@@ -102,6 +102,5 @@ void	ft_unset(char **dbuf, t_env **env_list)
 				pp = &(*pp)->next;
 		}
 	}
-	// if ($? != 1)
-		//$? = 0;
+	g_stat = 0;
 }
